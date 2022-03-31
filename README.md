@@ -1,6 +1,6 @@
-# PWA Boilerplate
+# Next Typescript Boilerplate
 
-This is the Next.js application for PWA Frontend Template
+This is the Next.js application for Web Frontend Template
 
 ### Lighthouse
 
@@ -36,7 +36,7 @@ npm ^6.14.13
 run script
 
 ```
-npx tomibudis/codelabs-next-pwa {appName}
+npx tomibudis/codelabs-next-web {appName}
 ```
 
 When init project successfully. follow the following command script to start
