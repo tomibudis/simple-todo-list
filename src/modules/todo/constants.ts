@@ -1,4 +1,3 @@
-export const INCREASE_COUNT = "INCREASE_COUNT";
-export const DECREASE_COUNT = "DECREASE_COUNT";
-export const RESET_COUNT = "RESET_COUNT";
-export const SET_IS_LOADING = "SET_IS_LOADING";
+export const SET_LOADING = "IS_LOADING";
+export const SET_TODOS = "SET_TODOS";
+export const SET_ERROR = "IS_ERROR";

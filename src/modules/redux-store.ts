@@ -15,4 +15,7 @@ const makeStore = (initialState: any) => {
   return createStore(reducers, initialState, storeEnhancers);
 };
 
+const getStoreState = makeStore({}).getState;
+export type RootState = ReturnType<typeof getStoreState>;
+
 export default makeStore;

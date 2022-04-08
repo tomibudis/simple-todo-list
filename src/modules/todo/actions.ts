@@ -1,33 +1,43 @@
+import axios from "axios";
 import * as constants from "./constants";
 
-export const increaseCount = () => {
-  return {
-    type: constants.INCREASE_COUNT,
-  };
+const URI = "https://jsonplaceholder.typicode.com";
+const ENDPOINT = "/posts";
+
+const generateRequest = (totalRequest: number) => {
+  const request = [];
+  for (let i = 0; i < totalRequest; i++) {
+    request.push(axios.get(`${URI + ENDPOINT}/${i + 1}`));
+  }
+  return request;
 };
 
-export const decreaseCount = () => {
+const setIsLoading = (isLoading: boolean) => {
   return {
-    type: constants.DECREASE_COUNT,
-  };
-};
-
-export const resetCount = () => {
-  return async (dispatch) => {
-    dispatch(setIsLoading(true));
-
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
-    dispatch({
-      type: constants.RESET_COUNT,
-    });
-    dispatch(setIsLoading(false));
-  };
-};
-
-export const setIsLoading = (isLoading = false) => {
-  return {
-    type: constants.SET_IS_LOADING,
+    type: constants.SET_LOADING,
     payload: isLoading,
+  };
+};
+
+export const fetchTodos = () => {
+  return async (dispatch) => {
+    await dispatch(setIsLoading(true));
+    axios.all(generateRequest(100)).then(
+      axios.spread((...response) => {
+        response.map((res) => {
+          const { id, body, title, userId } = res?.data || {};
+          dispatch({
+            type: constants.SET_TODOS,
+            payload: {
+              id,
+              body,
+              title,
+              userId,
+            },
+          });
+        });
+        dispatch(setIsLoading(false));
+      })
+    );
   };
 };

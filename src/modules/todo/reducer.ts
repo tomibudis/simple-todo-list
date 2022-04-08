@@ -1,20 +1,30 @@
 import * as constants from "./constants";
 
 const initialState = {
-  count: 0,
-  loading: false,
+  isLoading: false,
+  isError: false,
+  data: [],
 };
 
 const todoReducer = (state = initialState, action) => {
   switch (action.type) {
-    case constants.INCREASE_COUNT:
-      return { ...state, count: state.count + 1 };
-    case constants.DECREASE_COUNT:
-      return { ...state, count: state.count - 1 };
-    case constants.RESET_COUNT:
-      return initialState;
-    case constants.SET_IS_LOADING:
-      return { ...state, loading: action.payload };
+    case constants.SET_LOADING:
+      return {
+        ...state,
+        isError: false,
+        isLoading: action.payload,
+      };
+    case constants.SET_TODOS:
+      return {
+        ...state,
+        data: [...state.data, action.payload],
+      };
+    case constants.SET_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
     default:
       return state;
   }
