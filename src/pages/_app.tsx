@@ -2,9 +2,22 @@ import "../styles/global.css";
 
 import React from "react";
 import type { AppProps } from "next/app";
+import { Provider } from "react-redux";
+import { Store } from "redux";
 
-function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+import makeStore from "../modules/redux-store";
+import withRedux from "../hocs/with-redux";
+interface MyAppContext extends AppProps {
+  store: Store;
+  isServer: boolean;
 }
 
-export default App;
+function App({ Component, pageProps, store }: MyAppContext) {
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  );
+}
+
+export default withRedux(makeStore)(App);
