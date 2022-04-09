@@ -17,12 +17,12 @@ const Card: React.FC<CardProps> = ({ id, title, body, onEdit, onDelete }) => {
         <div className="flex gap-3">
           <Edit3
             size={16}
-            className="cursor-pointer"
+            className="cursor-pointer hover:text-teal-500"
             onClick={() => onEdit(id)}
           />
           <Trash2
             size={16}
-            className="cursor-pointer"
+            className="cursor-pointer hover:text-red-500"
             onClick={() => onDelete(id)}
           />
         </div>
